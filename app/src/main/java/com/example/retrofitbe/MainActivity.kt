@@ -28,11 +28,14 @@ class MainActivity : AppCompatActivity() {
         val service = retrofitObj.create(PostApiService::class.java)
 
         lifecycleScope.launch {
-            val response = service.getPosts()
-            response.forEach {
-                println(it)
-                binding.textView.text = it.body//response.toString()
+            val response = service.getPostById(7)
+            if (response.isSuccessful) {
+                val post = response.body()
+                binding.textView.text = "${post?.id} -> ${post?.title}" ?: "No title"
+            } else {
+                binding.textView.text = "Error: ${response.code()}"
             }
+
         }
     }
 }

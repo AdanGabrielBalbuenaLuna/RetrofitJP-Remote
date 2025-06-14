@@ -2,7 +2,7 @@ package com.example.retrofitbe
 
 import com.google.gson.annotations.SerializedName
 
-data class PostModel(
+data class PostModelResponse(
     @SerializedName("userId")
     val userId: Int,
     @SerializedName("id")
