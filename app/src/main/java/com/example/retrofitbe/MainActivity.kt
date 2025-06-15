@@ -27,8 +27,10 @@ class MainActivity : AppCompatActivity() {
 
         val service = retrofitObj.create(PostApiService::class.java)
 
+        val obj = PostModelRequest(1, "Title nuevo", "Body nuevo")
+
         lifecycleScope.launch {
-            val response = service.getPostById(7)
+            val response = service.insertPost(obj)
             if (response.isSuccessful) {
                 val post = response.body()
                 binding.textView.text = "${post?.id} -> ${post?.title}" ?: "No title"
